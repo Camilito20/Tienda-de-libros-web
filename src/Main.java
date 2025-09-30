@@ -5,6 +5,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Library library = new Library();
 
+        library.loadUsers();
+        library.loadBooks();
+        saved(library);
+
         while (true) {
             System.out.println("\n---- Library Manager ----");
             System.out.println("1. Add book");
@@ -13,7 +17,8 @@ public class Main {
             System.out.println("4. Show available books");
             System.out.println("5. Lend book");
             System.out.println("6. Return book");
-            System.out.println("7. Exit");
+            System.out.println("7. Saved");
+            System.out.println("8. Exit");
             System.out.print("Choose an option: ");
 
             int option = scanner.nextInt();
@@ -26,7 +31,7 @@ public class Main {
                     System.out.print("Enter author: ");
                     String author = scanner.nextLine();
 
-                    Book book = new Book(title, author);
+                    Book book = new Book(title, author, true);
                     library.addBook(title, book);
                     System.out.println("Book added successfully!");
                     break;
@@ -38,7 +43,7 @@ public class Main {
                     int userId = scanner.nextInt();
                     scanner.nextLine();
 
-                    User user = new User(userName, userId, null);
+                    User user = new User(userName, userId);
                     library.addUser(userId, user);
                     System.out.println("User registered successfully!");
                     break;
@@ -73,14 +78,23 @@ public class Main {
                     library.returnBook(returnTitle, returnUserId);
                     break;
 
-                case 7: // Salir
+
+                case 8: // Salir
                     System.out.println("Exiting...");
                     scanner.close();
+                    saved(library);
                     return;
 
                 default:
                     System.out.println("Invalid option, try again.");
+                    break;
             }
         }
+
+    }
+
+    static void saved(Library save){
+        save.saveUserTXT();
+        save.saveBooksTXT();
     }
 }

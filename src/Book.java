@@ -1,14 +1,15 @@
 public class Book {
-    private String title;
+    private String title = "";
     private String author;
     private boolean availability = true;
 
     public Book(){
     }
 
-    public Book(String title, String author){
+    public Book(String title, String author, boolean availability){
         setTitle(title);
         setAuthor(author);
+        setAvailability(availability);
     }
 
     public void setTitle(String title) {
